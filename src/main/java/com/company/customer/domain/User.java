@@ -9,23 +9,24 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String username;
-	private String password;
+	private String name;
+	private String lastname;
+	private String address;
+	private String city;
+	private String email;
+	private boolean terms;
 
-	public String getUsername() {
-		return username;
+	public User(String name, String lastname, String address, String city, String email, boolean terms) {
+		this.name = name;
+		this.lastname = lastname;
+		this.address = address;
+		this.city = city;
+		this.email = email;
+		this.terms = terms;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	public User() {
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public Long getId() {
@@ -36,12 +37,54 @@ public class User {
 		this.id = id;
 	}
 
-	public User() {
+	public String getName() {
+		return name;
 	}
 
-	public User(String username, String password) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public boolean isTerms() {
+		return terms;
+	}
+
+	public void setTerms(boolean terms) {
+		this.terms = terms;
+	}
+
 }
+
+

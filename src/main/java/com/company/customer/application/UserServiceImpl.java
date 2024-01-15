@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -17,27 +18,31 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Autowired
-	private PasswordEncoder passwordEncoder;  // Inyecta el PasswordEncoder aquí
+	private PasswordEncoder passwordEncoder;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUsername(username);
+	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+		User user = userRepository.findByName(name);
 		if (user == null) {
 			throw new UsernameNotFoundException("Usuario no encontrado");
 		}
 		return new org.springframework.security.core.userdetails.User(
-			user.getUsername(), user.getPassword(), Collections.emptyList());
+			user.getName(), user.getLastname(), Collections.emptyList());
 	}
 
 	@Override
 	public void saveUser(User user) {
-		// Antes de guardar el usuario, asegúrate de codificar la contraseña
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setLastname(passwordEncoder.encode(user.getLastname()));
 		userRepository.save(user);
 	}
 
-	public boolean authenticate(String username, String password) {
-		User user = userRepository.findByUsername(username);
-		return user != null && passwordEncoder.matches(password, user.getPassword());
+	public boolean authenticate(String name, String lastname) {
+		User user = userRepository.findByName(name);
+		return user != null && passwordEncoder.matches(lastname, user.getLastname());
+	}
+
+	@Override
+	public List<User> getAllInformation() {
+		return userRepository.findAll();
 	}
 }

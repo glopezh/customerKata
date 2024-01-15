@@ -2,8 +2,11 @@ package com.company.customer.controller;
 
 import com.company.customer.application.UserService;
 import com.company.customer.domain.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -18,15 +21,21 @@ public class UserController {
 
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody User user) {
-		String username = user.getUsername();
-		String password = user.getPassword();
+		String name = user.getName();
+		String lastname = user.getLastname();
 
-		if (userService.authenticate(username, password)) {
-			return ResponseEntity.ok("Login exitoso para el usuario: " + username);
+		if (userService.authenticate(name, lastname)) {
+			return ResponseEntity.ok("Hi, " + name.toUpperCase() + " " + lastname.toUpperCase());
 		} else {
 			// Autenticación fallida
 			return ResponseEntity.status(401).body("Error de autenticación: Credenciales incorrectas");
 		}
+	}
+
+	@GetMapping("/signin")
+	public ResponseEntity<List<User>> getInformation() {
+		List<User> allInformation = userService.getAllInformation();
+		return new ResponseEntity<>(allInformation, HttpStatus.OK);
 	}
 
 	@PostMapping("/signup")
