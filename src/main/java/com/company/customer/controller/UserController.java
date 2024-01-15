@@ -2,7 +2,6 @@ package com.company.customer.controller;
 
 import com.company.customer.application.UserService;
 import com.company.customer.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
