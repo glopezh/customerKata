@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(user);
 	}
 
-	public boolean authenticate(String name, String lastname) {
+	public boolean authenticate(String name, String lastname,String address,String city,String email, boolean terms) {
 		User user = userRepository.findByName(name);
 		return user != null && passwordEncoder.matches(lastname, user.getLastname());
 	}

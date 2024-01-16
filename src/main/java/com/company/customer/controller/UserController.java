@@ -19,12 +19,16 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	@PostMapping("/login")
+	@PostMapping("/signin")
 	public ResponseEntity<String> login(@RequestBody User user) {
 		String name = user.getName();
 		String lastname = user.getLastname();
+		String address = user.getAddress();
+		String city = user.getCity() ;
+		String email = user.getEmail();
+		boolean terms = user.isTerms();
 
-		if (userService.authenticate(name, lastname)) {
+		if (userService.authenticate(name, lastname,address,city,email,terms)) {
 			return ResponseEntity.ok("Hi, " + name.toUpperCase() + " " + lastname.toUpperCase());
 		} else {
 			// Autenticación fallida
@@ -32,7 +36,7 @@ public class UserController {
 		}
 	}
 
-	@GetMapping("/signin")
+	@GetMapping("/updateUser")
 	public ResponseEntity<List<User>> getInformation() {
 		List<User> allInformation = userService.getAllInformation();
 		return new ResponseEntity<>(allInformation, HttpStatus.OK);

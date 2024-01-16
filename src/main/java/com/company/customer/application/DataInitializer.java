@@ -26,12 +26,12 @@ public class DataInitializer implements CommandLineRunner {
 
 	private void initializeUsers() {
 		if (userRepository.findByName("geraldine") == null) {
-			User user1 = new User("geraldine", passwordEncoder.encode("lopez"),"Carrer de Neptu 33","Barcelona", "geraldine.lopez.huaman@gmail.com",false);
+			User user1 = new User("geraldine", passwordEncoder.encode("lopez"),"Carrer de Neptu 33","Barcelona", "geraldine@gmail.com",false);
 			userRepository.save(user1);
 		}
 
 		if (userRepository.findByName("sergi") == null) {
-			User user2 = new User("sergi",passwordEncoder.encode("lopez"),"Carrer de Eusebi 6","Barcelona", "sergipk@gmail.com",true);
+			User user2 = new User("sergi",passwordEncoder.encode("lopez"),"Carrer de Eusebi 6","Barcelona", "sergi@gmail.com",true);
 			userRepository.save(user2);
 		}
 	}

@@ -9,7 +9,7 @@ public interface UserService extends UserDetailsService {
 
 	void saveUser(User user);
 
-	boolean authenticate(String name, String lastname);
+	boolean authenticate(String name, String lastname,String address,String city,String email, boolean terms);
 
 	List<User> getAllInformation();
 }
